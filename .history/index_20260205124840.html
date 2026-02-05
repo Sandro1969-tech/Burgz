@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURGZ | Sabor que Pulsa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+            --dark: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: #ff8c00; }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, rgba(255,140,0,0.15) 0%, rgba(10,10,10,1) 70%);
+            padding: 0 20px;
+        }
+
+        .pulse-title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .btn-cta {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.4);
+            filter: hue-rotate(45deg);
+        }
+
+        /* --- Menu / Grid --- */
+        .menu-section {
+            padding: 100px 5%;
+        }
+
+        .grid-burgers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .burger-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #333;
+        }
+
+        .burger-card:hover {
+            transform: translateY(-15px);
+            border-color: #ff8c00;
+        }
+
+        .burger-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .burger-info {
+            padding: 25px;
+        }
+
+        .burger-info h3 {
+            margin-bottom: 10px;
+            color: #ff8c00;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #000;
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 2px solid #222;
+        }
+
+        .social-icons {
+            margin: 30px 0;
+        }
+
+        .social-icons a {
+            font-size: 2rem;
+            color: white;
+            margin: 0 20px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ff8c00;
+            transform: scale(1.3);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header nav { display: none; }
+            .pulse-title { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-hamburger"></i> BURGZ</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+<div class="countdown-bar">
+    🔥 OFERTA DE INAUGURAÇÃO: 20% OFF termina em: <span id="timer">00:00:00</span>
+</div>
+    <section class="hero" id="home">
+        <h1 class="pulse-title">Sabor Explosivo</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; color: #ccc;">A revolução do hambúrguer artesanal chegou.</p>
+        <button class="btn-cta">Peça Agora</button>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <div class="grid-burgers" id="burger-grid">
+            </div>
+    </section>
+<section class="testimonials" id="depoimentos">
+        <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem; color: #ff8c00;">Quem provou, viciou!</h2>
+        
+        <div class="testimonials-grid" id="testimonials-grid">
+            </div>
+    </section>
+
+    <style>
+        .testimonials {
+            padding: 80px 5%;
+            background: linear-gradient(180deg, #0a0a0a 0%, #151515 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: #1f1f1f;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ff4500;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.05);
+            background: #252525;
+        }
+
+        .stars {
+            color: #ff8c00;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #ff8c00;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+
+    <script>
+        // Adicione este bloco dentro da sua tag <script> existente
+        const testimonials = [
+            {
+                name: "Lucas Silva",
+                text: "O melhor blend que já comi em SP! O Classic Gold é surreal de suulento.",
+                img: "https://i.pravatar.cc/150?u=lucas"
+            },
+            {
+                name: "Mariana Costa",
+                text: "A entrega foi super rápida e o hambúrguer chegou quentinho. Nota 10!",
+                img: "https://i.pravatar.cc/150?u=mari"
+            },
+            {
+                name: "Ricardo Oliveira",
+                text: "O Smoky Bacon tem um gosto defumado de verdade. Atendimento impecável.",
+                img: "https://i.pravatar.cc/150?u=rick"
+            }
+        ];
+
+        const tGrid = document.getElementById('testimonials-grid');
+
+        testimonials.forEach(t => {
+            tGrid.innerHTML += `
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"${t.text}"</p>
+                    <div class="user-info">
+                        <img src="${t.img}" alt="${t.name}">
+                        <span class="user-name">${t.name}</span>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+    <footer id="contato">
+        <div class="logo">BURGZ</div>
+        <p>Onde cada mordida é um evento.</p>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+        
+        <p style="font-size: 0.8rem; color: #555;">&copy; 2024 BURGZ. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Dados dos Hambúrgueres
+        const burgers = [
+            { title: "Classic Gold", desc: "A harmonia perfeita entre o cheddar derretido e a carne premium.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" },
+            { title: "Smoky Bacon", desc: "O defumado levado ao extremo com bacon crocante em tiras.", img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500" },
+            { title: "Double Trouble", desc: "Dois blends de 180g para quem não aceita menos que o topo.", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500" },
+            { title: "Truffle Experience", desc: "A sofisticação da maionese trufada com cogumelos salteados.", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500" },
+            { title: "Veggie Blast", desc: "Explosão de sabores vegetais com grão-de-bico e especiarias.", img: "https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=500" },
+            { title: "Firehouse", desc: "Para os fortes: geleia de pimenta e jalapeños selecionados.", img: "https://images.unsplash.com/photo-1534790566855-4cb788d389ec?w=500" }
+        ];
+
+        const grid = document.getElementById('burger-grid');
+
+        // Renderizar Cards
+        burgers.forEach(b => {
+            grid.innerHTML += `
+                <div class="burger-card">
+                    <img src="${b.img}" alt="${b.title}">
+                    <div class="burger-info">
+                        <h3>${b.title}</h3>
+                        <p>${b.desc}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Efeito Suave no Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

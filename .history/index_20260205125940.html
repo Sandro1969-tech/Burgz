@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURGZ | Sabor que Pulsa</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+            --dark: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            padding-top: 130px; /* Espaço para header + timer fixos */
+        }
+
+        /* --- Countdown Bar --- */
+        .countdown-bar {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            position: fixed;
+            top: 75px; 
+            width: 100%;
+            z-index: 999;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+        }
+
+        #timer {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background: rgba(0,0,0,0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            height: 75px;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.8rem;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: #ff8c00; }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, rgba(10,10,10,1) 80%);
+            padding: 0 20px;
+        }
+
+        .pulse-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+            background: #fff;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .btn-cta {
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border: none;
+            border-radius: 50px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.2);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.5);
+            filter: brightness(1.2);
+        }
+
+        /* --- Menu Grid --- */
+        .menu-section { padding: 80px 5%; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ff8c00;
+        }
+
+        .grid-burgers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .burger-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid #222;
+        }
+
+        .burger-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff8c00;
+        }
+
+        .burger-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .burger-info { padding: 25px; }
+        .burger-info h3 { color: #ff8c00; margin-bottom: 10px; }
+        .burger-info p { color: #ccc; line-height: 1.5; }
+
+        /* --- Testimonials --- */
+        .testimonials {
+            padding: 80px 5%;
+            background: #0f0f0f;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ff4500;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover { transform: translateY(-5px); }
+        .stars { color: #ff8c00; margin-bottom: 15px; }
+        .user-info { display: flex; align-items: center; gap: 15px; margin-top: 15px; }
+        .user-info img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #ff4500; }
+
+        /* --- Footer --- */
+        footer {
+            background: #000;
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .social-icons { margin: 25px 0; }
+        .social-icons a {
+            font-size: 1.8rem;
+            color: white;
+            margin: 0 15px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover { color: #ff8c00; transform: scale(1.2); }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header nav { display: none; }
+            body { padding-top: 120px; }
+            .countdown-bar { top: 70px; font-size: 0.75rem; }
+            header { height: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-burger"></i> BURGZ</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#depoimentos">Depoimentos</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <div class="countdown-bar">
+        🔥 OFERTA DE HOJE: 20% OFF termina em: <span id="timer">00:00:00</span>
+    </div>
+
+    <section class="hero" id="home">
+        <h1 class="pulse-title"> Sabor Explosivo</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; color: #bbb;">O hambúrguer que você não apenas come, você presencia.</p>
+        <button class="btn-cta">Fazer meu Pedido</button>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <h2 class="section-title">Nossas Obras de Arte</h2>
+        <div class="grid-burgers" id="burger-grid"></div>
+    </section>
+
+    <section class="testimonials" id="depoimentos">
+        <h2 class="section-title">Quem Provou, Viciou!</h2>
+        <div class="testimonials-grid" id="testimonials-grid"></div>
+    </section>
+
+    <footer id="contato">
+        <div class="logo" style="justify-content: center; margin-bottom: 10px;">BURGZ</div>
+        <p>A melhor experiência gastronômica da sua vida.</p>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+        
+        <p style="font-size: 0.8rem; color: #444;">&copy; 2026 BURGZ Artesanal. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // --- Dados dos Burgers ---
+// --- Dados dos Burgers (Corrigidos) ---
+const burgers = [
+    { title: "Classic Gold", desc: "A harmonia perfeita entre o cheddar derretido e a carne premium.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" },
+    { title: "Smoky Bacon", desc: "O defumado levado ao extremo com bacon crocante em tiras.", img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=500" },
+    { title: "Double Trouble", desc: "Dois blends de 180g para quem não aceita menos que o topo.", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500" },
+    { title: "Truffle Experience", desc: "A sofisticação da maionese trufada com cogumelos salteados.", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500" },
+    { title: "Veggie Blast", desc: "Explosão de sabores vegetais com grão-de-bico e especiarias.", img: "https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=500" }, // Imagem corrigida aqui!
+    { title: "Firehouse", desc: "Para os fortes: geleia de pimenta e jalapeños selecionados.", img: "https://images.unsplash.com/photo-1534790566855-4cb788d389ec?w=500" }
+];
+        // --- Dados dos Depoimentos ---
+        const reviews = [
+            { name: "Lucas Silva", text: "O melhor blend que já comi! O Classic Gold é surreal.", img: "https://i.pravatar.cc/150?u=1" },
+            { name: "Mariana Costa", text: "Chegou muito rápido e a apresentação é impecável. Amei!", img: "https://i.pravatar.cc/150?u=2" },
+            { name: "Ricardo Oliveira", text: "O Smoky Bacon tem um gosto defumado de verdade. Nota 10.", img: "https://i.pravatar.cc/150?u=3" }
+        ];
+
+        // --- Renderização ---
+        const burgerGrid = document.getElementById('burger-grid');
+        burgers.forEach(b => {
+            burgerGrid.innerHTML += `
+                <div class="burger-card">
+                    <img src="${b.img}" alt="${b.title}">
+                    <div class="burger-info">
+                        <h3>${b.title}</h3>
+                        <p>${b.desc}</p>
+                    </div>
+                </div>`;
+        });
+
+        const testGrid = document.getElementById('testimonials-grid');
+        reviews.forEach(r => {
+            testGrid.innerHTML += `
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"${r.text}"</p>
+                    <div class="user-info">
+                        <img src="${r.img}">
+                        <span class="user-name">${r.name}</span>
+                    </div>
+                </div>`;
+        });
+
+        // --- Lógica do Cronômetro (4 horas) ---
+        function startTimer(duration, display) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(() => {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                display.textContent = `${hours < 10 ? "0"+hours : hours}:${minutes < 10 ? "0"+minutes : minutes}:${seconds < 10 ? "0"+seconds : seconds}`;
+                if (--timer < 0) timer = duration;
+            }, 1000);
+        }
+
+        // --- Inicialização ---
+        window.onload = () => {
+            startTimer(60 * 60 * 4, document.querySelector('#timer'));
+        };
+
+        // Scroll Suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
